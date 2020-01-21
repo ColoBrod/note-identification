@@ -1,0 +1,286 @@
+// $fa-font-path: '~@fortawesome/fontawesome-free/webfonts'; 
+// @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+// @import '~@fortawesome/fontawesome-free/scss/solid';
+// @import '~@fortawesome/fontawesome-free/scss/regular';
+
+$orange: #f4b200;
+$txt: #393939;
+
+#note-identifier-app {
+  color: $txt;
+  position: relative;
+  font-family: Gotham-Light, sans-serif; 
+  // font-family: Verdana, Geneva, Tahoma, sans-serif;
+  width: 100%; max-width: 1200px; height: auto;
+
+  #navbar {
+    position: relative;
+    background-color: $orange;
+    width: 100%; height: 39px;
+    box-sizing: border-box;
+    padding: 10px;
+
+    i, img {
+      font-size: 30px; 
+      cursor: pointer;
+      &#navbar-settings { position: absolute; right: 10px; top: 10px; width: 20px; }
+    }
+    
+    &-game {
+      position: absolute;
+      width: 120px; height: 30px;
+      margin-left: -60px;
+      display: flex; justify-content: center;
+      align-items: center;
+      left: 50%; top: 4px;
+      font-size: 20px;
+      
+      &-number {
+      }
+      &-accuracy {
+      }
+    }
+
+  }
+
+  #main-menu, #exercises, #game, #settings {
+    display: none;
+    box-sizing: border-box;
+    width: 100%; height: 100%; min-height: 500px;
+    padding: 8px;
+  }
+
+  #main-menu {
+    // background-color: grey;
+
+
+    .note-identification-tests {
+      margin-top: 12px;
+      display: flex; flex-direction: column; align-items: center;
+      &-header, &-hr, &-description, &-help { text-align: center; }
+      &-header { 
+        font-size: 28px;
+      }
+      &-hr { background-color: $orange; width: 219px; height: 4px; margin: 34px 0 32px 0; }
+      &-description { font-size: 18px; }
+      &-help { font-size: 22px; color: $orange; cursor: pointer; margin: 30px 0 20px 0; }
+    }
+
+    .list-of-exercise-lvls {
+      position: relative; width: 100%; height: auto;
+
+      .exercise-lvl {
+        position: absolute; margin-left: -160px;
+        &:nth-child(1) { left: 25%; top: 0; }
+        &:nth-child(2) { left: 50%; top: 0; }
+        &:nth-child(3) { left: 75%; top: 0; }
+        &:nth-child(4) { left: 22%; top: 260px;}
+        &:nth-child(5) { left: 78%; top: 260px;}
+        // &:nth-child(1) { left: 25%; }
+        display: flex; flex-direction: column; align-items: center;
+        width: 320px; height: auto; text-align: auto;
+        &-stars {
+          margin: 30px 0; width: 100%;
+          display: flex; flex-direction: row; justify-content: center;
+          img { width: 52px; height: 50px; margin: 0 6px; }
+        }
+        &-button {
+          width: 163px; height: 42px;
+          margin: 30px 0 30px 0;
+          background-color: $orange;
+          // padding: 13px 39px 14px 39px;
+          line-height: 42px; text-align: center; font-size: 18px;
+          border-radius: 21px; 
+          cursor: pointer;
+        } 
+        &-title {
+          font-size: 22px;
+        }
+      }
+    }
+
+    // .exercise-lvl {
+    //   display: flex; justify-content: space-between;
+    //   border-radius: 5px;
+    //   margin-bottom: 4px;
+    //   transition: 0.3s;
+    //   cursor: pointer;
+    //   &:hover { background-color: lightgrey; }
+    //   .title,.perfomance,.accuracy { padding: 8px; }
+    //   .title { width: 45%; }
+    //   .perfomance { }
+    //   .accuracy { }
+    // }
+
+    
+  }
+
+  #exercises {
+    .exercise {
+      display: flex; justify-content: space-between;
+      border-radius: 5px;
+      margin-bottom: 4px;
+      transition: 0.3s;
+      cursor: pointer;
+      &:hover { background-color: lightgrey; }
+      .title,.perfomance,.accuracy { padding: 8px;  }
+      .checkbox {  }
+      .title { width: 45%; }
+      .perfomance { display: none; }
+      .accuracy { display: none; }
+    }
+  }
+
+  #game {
+
+    #musical-scores {
+      position: relative;
+      img { 
+        position: relative;
+        width: 340px; height: auto; 
+        left: 50%; margin-left: -170px;
+      }
+      #helpers {
+        position: absolute;
+        width: 340px; height: 125px;
+        left: 50%; top: 0; margin-left: -170px;
+        span { 
+          display: block; width: 12px; text-align: center;
+          color: $orange; font-size: 14px; font-weight: bold; position: absolute; 
+        }
+        span:nth-child(1) { left: 101.5%; bottom: 7%; }
+        span:nth-child(2) { left: 101.5%; bottom: 17.5%; }
+        span:nth-child(3) { left: 101.5%; bottom: 28%; }
+        span:nth-child(4) { left: 101.5%; bottom: 38.5%; }
+        span:nth-child(5) { left: 105%; bottom: 3%; }
+        span:nth-child(6) { left: 105%; bottom: 13.5%; }
+        span:nth-child(7) { left: 105%; bottom: 24%; }
+        span:nth-child(8) { left: 105%; bottom: 34.5%; }
+        span:nth-child(9) { left: 105%; bottom: 45%; }
+      }
+    }
+    #note-buttons {
+      display: flex; justify-content: center;
+      flex-wrap: wrap;
+      .line-break {
+        width: 100%; height: 0;
+      }
+      button {
+        // Reseting default styles:
+        border: 0; padding: 0; font-size: 100%; font-family: inherit;
+        // My styles:
+        background-color: $orange;
+        margin: 6px 9px 7px 9px;
+        width: 105px; height: 43px;
+        &.correct-answer {
+          background-color: #00b994;
+        }
+        &.incorrect-answer {
+          background-color: #e74b00;
+        }
+      }
+    }
+    #title {
+      text-align: center;
+      font-size: 36px;
+    }
+  }
+
+  #settings {
+    font-size: 20px;
+    padding: 10px;
+    .setting {
+      width: 400px; height: 34px;
+      margin-bottom: 6px;
+      display: flex; justify-content: space-between; align-items: center;
+      .switch { }
+    }
+  }
+
+  #settings, #exercises {
+    #go-back { position: absolute; margin-top: 0; margin-left: -130px; left: 50%; bottom: 20px; }
+  }
+
+
+  .tooltip {
+    position: absolute;
+    background-color: khaki;
+    padding: 2px;
+    border: 1px solid black;
+    font-size: 12px;
+  }
+
+  #logo {
+    display: block;
+    margin-top: 15px; margin-left: 57px;
+  }
+  #go-back {
+    position: relative;
+    display: block; cursor: pointer;
+    background-color: $orange;
+    margin-top: 81px; border-radius: 26px; 
+    width: 262px; height: 52px;
+    line-height: 52px;
+    left: 50%; margin-left: -131px;
+    font-size: 16 px; text-align: center;
+  }
+
+  // SWITCHES
+    /* The switch - the box around the slider */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    /* The slider */
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    input:checked + .slider {
+      background-color: $orange;
+    }
+
+    input:focus + .slider {
+      box-shadow: 0 0 1px $orange;
+    }
+
+    input:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+
+}
+
+
+
