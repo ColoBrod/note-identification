@@ -5,6 +5,7 @@ export class App {
   static menu = [
     {
       name: 'Novice Exercises',
+      testName: 'Novice Test',
       id: 'exercises-novice',
       stars: 1,
       exercise: [
@@ -58,6 +59,7 @@ export class App {
     },
     {
       name: 'Apprentice Exercises',
+      testName: 'Apprentice Test',
       id: 'exercises-apprentice',
       stars: 2,
       exercise: [
@@ -125,6 +127,7 @@ export class App {
     },
     {
       name: 'Adept Exercises',
+      testName: 'Adept Test',
       id: 'exercises-adept',
       stars: 3,
       exercise: [
@@ -197,6 +200,7 @@ export class App {
     },
     {
       name: 'Expert Exercises',
+      testName: 'Expert Test',
       id: 'exercises-expert',
       stars: 4,
       exercise: [
@@ -359,8 +363,9 @@ export class App {
     },
     {
       name: 'Master Exercises',
+      testName: 'Master Test',
       id: 'exercises-master',
-      stars: 4,
+      stars: 5,
       exercise: [
         {
           name: 'Exercise 17: Treble Master',
@@ -772,13 +777,13 @@ export class App {
       ],
     },
   ]
-  static settings = {
-    helpers: true,
+  static defaultSettings = {
+    helpers: false,
+    nextQuestion: 0.75,
   }
+  static settings = { }
 
   static checkUserBrowser() {
-    console.log("It works")
-
     // var ua = window.navigator.userAgent;
     // var msie = ua.indexOf("MSIE ");
     // if (msie > 0) // If Internet Explorer, return version number
@@ -788,8 +793,28 @@ export class App {
   }
 
   static readSettings() {
-    console.log('Cookies: ', document.cookie)
-    
+    // console.log('Cookies: ', document.cookie)
+    // let res = this.getCookie('settings')
+    // console.log(res)
+
+    let all = this.defaultSettings
+    for (let key in all) {
+      let value = this.getCookie(key)
+        , number = parseInt(value)
+      if (value) {
+        if (value == 'true' || value == 'false')
+          this.settings[key] = JSON.parse( value )
+        else if (number) 
+          this.settings[key] = number
+        else 
+          this.settings[key] = value
+      }
+      else {
+        this.settings[key] = all[key]
+      }
+    }
+    console.log(this.settings)
+
   }
 
   static resetSettings() {
@@ -808,9 +833,22 @@ export class App {
     return now.toGMTString()
   }
   
+  static getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
 }
 
-App.resetSettings()
-// App.writeSettings('name', 'Nicholas')
-// App.writeSettings('age', '26')
-App.readSettings()
+// App.writeSettings('helpers', false)

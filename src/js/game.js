@@ -10,8 +10,71 @@ export class Game {
   static noteButtons
   static buttonsWrapper
   static exercise
+  static title
   static finalAnswer // true|false
   static goBack
+  static divHelpers
+  static helpers = {
+    treble: [
+      { value: "F", left: 101.5, bottom: 56.5 },
+      { value: "A", left: 101.5, bottom: 61.5 },
+      { value: "C", left: 101.5, bottom: 66.5 },
+      { value: "E", left: 101.5, bottom: 71.5 },
+
+      { value: "E", left: 105  , bottom: 54.5 },
+      { value: "G", left: 105  , bottom: 59.5 },
+      { value: "B", left: 105  , bottom: 64.5 },
+      { value: "D", left: 105  , bottom: 69.5 },
+      { value: "F", left: 105  , bottom: 74.5 },
+    ],
+    bass: [
+      { value: "A", left: 101.5, bottom: 53.5 },
+      { value: "C", left: 101.5, bottom: 58.5 },
+      { value: "E", left: 101.5, bottom: 63.5 },
+      { value: "G", left: 101.5, bottom: 68.5 },
+      
+      { value: "G", left: 105  , bottom: 51.5 },
+      { value: "B", left: 105  , bottom: 56.5 },
+      { value: "D", left: 105  , bottom: 61.5 },
+      { value: "F", left: 105  , bottom: 66.5 },
+      { value: "A", left: 105  , bottom: 71.5 },
+    ],
+    trebleBass: [
+      { value: "F", left: 101.5, bottom: 56.5 },
+      { value: "A", left: 101.5, bottom: 61.5 },
+      { value: "C", left: 101.5, bottom: 66.5 },
+      { value: "E", left: 101.5, bottom: 71.5 },
+
+      { value: "E", left: 105  , bottom: 54.5 },
+      { value: "G", left: 105  , bottom: 59.5 },
+      { value: "B", left: 105  , bottom: 64.5 },
+      { value: "D", left: 105  , bottom: 69.5 },
+      { value: "F", left: 105  , bottom: 74.5 },
+
+      { value: "A", left: 101.5, bottom: 13 },
+      { value: "C", left: 101.5, bottom: 18 },
+      { value: "E", left: 101.5, bottom: 23 },
+      { value: "G", left: 101.5, bottom: 28 },
+      
+      { value: "G", left: 105  , bottom: 11 },
+      { value: "B", left: 105  , bottom: 16 },
+      { value: "D", left: 105  , bottom: 21 },
+      { value: "F", left: 105  , bottom: 26 },
+      { value: "A", left: 105  , bottom: 31 },
+    ],
+    alto: [
+      { value: "G", left: 101.5, bottom: 53.5 },
+      { value: "B", left: 101.5, bottom: 58.5 },
+      { value: "D", left: 101.5, bottom: 63.5 },
+      { value: "F", left: 101.5, bottom: 68.5 },
+      
+      { value: "F", left: 105  , bottom: 51.5 },
+      { value: "A", left: 105  , bottom: 56.5 },
+      { value: "C", left: 105  , bottom: 61.5 },
+      { value: "E", left: 105  , bottom: 66.5 },
+      { value: "G", left: 105  , bottom: 71.5 },
+    ],
+  }
   
   // Game stats
   static questions
@@ -23,6 +86,10 @@ export class Game {
     this.element = document.querySelector(`${App.selector} ${this.id}`)
     this.musicalScores = document.querySelector(`${App.selector} ${this.id} #musical-scores img`)
     this.buttonsWrapper = document.querySelector(`${App.selector} ${this.id} #note-buttons`)
+    this.divHelpers = document.querySelector(`${App.selector} ${this.id} #helpers`)
+    this.toggleHelpers(App.settings.helpers)
+    this.title = document.querySelector(`${App.selector} ${this.id} #title`)
+
     let buttons = ['C#','D#','E#','F#','G#','A#','B#', '_', 'C','D','E','F','G','A','B', '_', 'C♭','D♭','E♭','F♭','G♭','A♭','B♭']
     this.noteButtons = []
     buttons.forEach((innerHTML) => {
@@ -43,9 +110,10 @@ export class Game {
     this.goBack = Navbar.createGoBackBtn()
     this.element.appendChild(this.goBack)
   }
+
   // It is not a destructor of class, just a function
   static destruct() {
-    this.musicalScores.src = ''
+    // this.musicalScores.src = ''
     this.buttonsWrapper.innerHTML = ''
     this.goBack.remove()
     Navbar.number.innerHTML = ''
@@ -55,14 +123,23 @@ export class Game {
   static start(exercise) {
     this.exercise = exercise
     let count = this.askCount(exercise)
+    if (!count) {
+      this.returnToExercises()
+      return
+    }
     this.questions = this.shuffleExercises(exercise, count)
     this.questionIndex = 0
     this.correctAnswers = 0
+    console.log(exercise)
     this.askPlayer()
   }
 
   static finish() {
-    alert(`Congratulations, you've just finished ${this.exercise.name}`)
+    alert(`You've just finished ${this.exercise.name}\nYour result is ${this.correctAnswers}/${this.questions.length} (${Math.round(this.correctAnswers*100/this.questions.length)}%)`)
+    this.returnToExercises()
+  }
+
+  static returnToExercises() {
     Exercises.fillMenu(Exercises.menuItem)
     Menu.display('exercises')
     // Удаляем из истории 'game', а также 'exercises'
@@ -86,7 +163,6 @@ export class Game {
   }
 
   static askPlayer() {
-    console.log(this.questions)
     // Если не осталось вопросов в упражнении, то в таком случае завершаем
     if (this.questions.length == this.questionIndex) this.finish() 
     // Скидываем окончательный ответ (используется для счетчиков статистики)
@@ -103,7 +179,11 @@ export class Game {
     console.log(imgName)
     imgName = imgName.replace(/\#/, '%23')
     this.musicalScores.src = `img/notes/${imgName}.png`
-    console.log(this.musicalScores.src)
+    // Определяем Ключ для хелперов
+    let clef = this.getClef(imgName)
+    console.log(this.divHelpers)
+    this.clearHelpers()
+    this.fillHelpers(clef)
   }
 
   static handleClick(e) {
@@ -182,10 +262,41 @@ export class Game {
       audio.play()
       setTimeout(() => {
         resolve(1)
-      }, 1000)
+      }, App.settings.nextQuestion*1000 )
       // audio.addEventListener('ended', function() {
       // }, {once: true})
     })
+  }
+
+  static getClef(str) {
+    let n = str.match(/(\d*) [ABCDEFG][1-9][#b]?/)[1]
+    console.log("Note img #:", n)
+    if (n >= 1 && n <= 150) return "treble"
+    else if (n >= 151 && n <= 300) return "bass"
+    else if (n >= 301 && n <= 453) return "trebleBass"
+    else if (n >= 454 && n <= 603) return "alto"
+  }
+
+  static clearHelpers() {
+    this.divHelpers.innerHTML = ""
+  }
+
+  static fillHelpers(clef, offset=0) {
+    let helpers = this.helpers[clef]
+    helpers.forEach((helper, index) => {
+      let span = document.createElement('span')
+      span.innerHTML = helper.value
+      span.style.left = `${helper.left}%`
+      span.style.bottom = `${helper.bottom}%`
+      this.divHelpers.appendChild(span)
+    })
+  }
+
+  static toggleHelpers(state) {
+    if (!this.divHelpers) return
+    if (state) this.divHelpers.style.display = 'block'
+    else this.divHelpers.style.display = 'none'
+
   }
 
 }

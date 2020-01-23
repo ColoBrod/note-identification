@@ -18,6 +18,9 @@ import '../scss/main.scss'
 import { App, Navbar, Menu } from './internal'
 
 App.checkUserBrowser()
+App.readSettings()
 Navbar.initialize()
 Navbar.setListners()
 Menu.display('main')
+
+

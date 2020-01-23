@@ -19,10 +19,11 @@ export class Exercises {
   static fillMenu(menuItem) {
     this.menuItem = menuItem
     let exercises = menuItem.exercise
+      , testName = menuItem.testName
     exercises.forEach(exercise => {
       let div = this.createMenuElement(exercise.name, 100, 100)
       this.element.appendChild(div)
-      div.addEventListener('click', () => this.handleClick(exercise), { once: true })
+      div.addEventListener('click', () => this.handleClick(exercise, testName), { once: true })
     })
     // Присоединяем кнопку "Go back"
     let goBack = Navbar.createGoBackBtn()
@@ -50,10 +51,11 @@ export class Exercises {
     return div
   }
 
-  static handleClick(exercise) {
+  static handleClick(exercise, testName) {
     Menu.display('game')
     Game.start(exercise)
-
+    Game.title.innerHTML = testName
+    
     // let menuItem = App.menu.filter(el => el.id == id)[0]
     // Exercises.fillMenu(menuItem)
   }
