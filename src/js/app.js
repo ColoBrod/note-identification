@@ -779,7 +779,7 @@ export class App {
   ]
   static defaultSettings = {
     helpers: false,
-    nextQuestion: 0.75,
+    nextQuestion: 0,
   }
   static settings = { }
 
