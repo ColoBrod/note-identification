@@ -1,12 +1,5 @@
 import { App, Exercises, Game, MainMenu, Navbar, Settings } from './internal'
 
-// console.log("App: \n", App)
-// console.log("Exercises: \n", Exercises)
-// console.log("Game: \n", Game)
-// console.log("MainMenu: \n", MainMenu)
-// console.log("Navbar: \n", Navbar)
-// console.log("Settings: \n", Settings)
-
 export class Menu {
   static page = {
     main: {

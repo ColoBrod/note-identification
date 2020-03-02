@@ -7,9 +7,10 @@ module.exports = (env, argv) => ({
   mode: 'development',
   entry: {
     main: './src/js/main.js',
+    teacher: './src/js/teacher.js',
   },
   output: {
-    filename: 'js/bundle.js',
+    filename: 'js/[name]-bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
   module: {
@@ -47,7 +48,7 @@ module.exports = (env, argv) => ({
         ]
       },
       {
-        test: /(logo|star|settings)\.(png|svg)$/,
+        test: /(logo|star|settings|search)\.(png|svg)$/,
         exclude: /node_modules/,
         use: {
           loader: 'file-loader',
@@ -84,6 +85,11 @@ module.exports = (env, argv) => ({
       template: 'src/index.html',
       filename: 'index.html',
       chunks: ['main']
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/teacher.html',
+      filename: 'teacher.html',
+      chunks: ['teacher']
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',

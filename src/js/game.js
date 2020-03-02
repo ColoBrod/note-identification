@@ -120,9 +120,9 @@ export class Game {
     Navbar.accuracy.innerHTML = ''
   }
 
-  static start(exercise) {
+  static start(exercise, count = undefined) {
     this.exercise = exercise
-    let count = this.askCount(exercise)
+    if (!count) count = this.askCount(exercise)
     if (!count) {
       this.returnToExercises()
       return

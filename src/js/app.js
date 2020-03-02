@@ -1,5 +1,3 @@
-// import { Navbar } from './internal'
-
 export class App {
   static selector = '#note-identifier-app'
   static menu = [
@@ -779,7 +777,7 @@ export class App {
   ]
   static defaultSettings = {
     helpers: false,
-    nextQuestion: 0,
+    nextQuestion: 1,
   }
   static settings = { }
 

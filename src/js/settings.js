@@ -1,12 +1,3 @@
-// import App from './app'
-// import Exercises from './exercises'
-// import Game from './game'
-// import MainMenu from './main-menu'
-// import Menu from './menu'
-// import Navbar from './navbar'
-// import Settings from './exercises'
-// import Tooltip from './tooltip'
-
 import { App, Navbar } from './internal'
 import { Game } from './game'
 

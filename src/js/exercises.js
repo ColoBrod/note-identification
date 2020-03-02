@@ -51,9 +51,9 @@ export class Exercises {
     return div
   }
 
-  static handleClick(exercise, testName) {
+  static handleClick(exercise, testName, count = undefined) {
     Menu.display('game')
-    Game.start(exercise)
+    Game.start(exercise, count)
     Game.title.innerHTML = testName
     
     // let menuItem = App.menu.filter(el => el.id == id)[0]

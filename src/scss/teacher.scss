@@ -1,0 +1,66 @@
+$orange: #f4b200;
+$txt: #393939;
+
+#teacher-app {
+  
+  font-family: Gotham-Light, sans-serif; 
+  font-size: 20px;
+  margin: auto;
+  width: 100%; max-width: 1200px; height: auto;
+  
+
+  #first-step {
+    display: flex; flex-direction: column;
+    .searchbox {
+      padding: 10px;
+      background-color: $orange;
+      display: flex;
+      input {
+  
+      }
+      button {
+        img {
+          width: 16px; height: 16px;
+        }
+      }
+    }
+    table {
+      font-size: 14px;
+      width: 100%; 
+      margin: 0; padding: 0;
+      margin-top: 10px;
+      thead {
+        tr>th { text-align: left; }
+        tr>th:nth-child(1) { width: 20px; }
+      }
+    }
+  }
+
+  #second-step {
+    display: none;
+    font-size: 14px;
+    .number-of-exercises {
+      display: flex; height: 210px;
+      .level {
+        height: 1px;
+        h1 {
+          font-size: 16px;
+          padding-left: 5px;
+        }
+        div {
+          display: flex;
+          span  { margin: 5px; width: 60% }
+          input { margin: 5px; width: 40% }
+        }
+      }
+    }
+    .bottom-bar {
+      button {
+        font-size: 14px;
+      }
+    }
+  }
+
+  
+}
+
