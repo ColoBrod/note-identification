@@ -19,7 +19,7 @@
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.9.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "regenerator-runtime": "^0.13.3",
     "reload": "^3.0.3",
     "sass-loader": "^8.0.1",
